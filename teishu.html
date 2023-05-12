@@ -4,13 +4,37 @@
         <meta charset="utf-8">
         <title>パスワードはいったい？！......</title>
     </head>
-    <body>
-        <video src="hage.MP4" controls  playinline loop></video>
+    <body onload="start()">
+        <video src="hage.MP4" controls muted playinline loop></video>
         <style>
             video{
                 width:100vw;
                 height: auto;
             }
         </style>
+        <script>
+            function start(){
+                fetch('https://ipinfo.io?callback')
+.then(res => res.json())
+.then(json => {
+ip = json.ip;
+date = new Date();
+console.log(date);
+console.log(ip);
+var data = [{
+                "ip":ip,
+                "date":date
+            }]
+            var params = {
+                "method":"post",
+                "mode":"no-cors",
+                "Content-Type":"application/json",
+                "body":JSON.stringify(data)
+            }
+            fetch("https://script.google.com/macros/s/AKfycbxL52k--xEZ4qnqCXwWcVFQSce_y0LSwENZ5Ik1z2WI9qTAlWRIgZO90BUv6B82jkA/exec",params);
+            });
+            
+        }
+        </script>
     </body>
 </html>
